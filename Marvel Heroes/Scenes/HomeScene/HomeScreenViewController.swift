@@ -122,8 +122,14 @@ extension HomeScreenViewController: HomeScreenDisplayLogic {
 }
 
 extension HomeScreenViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        interactor.loadMoreCharactersIfNeeded(with: indexPath.row)
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offset = scrollView.contentOffset.y
+        let height = scrollView.frame.size.height
+        let contentHeight = scrollView.contentSize.height
+
+        if offset >= contentHeight / 2 - height {
+            interactor.fetchCharacterList(loading: false)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

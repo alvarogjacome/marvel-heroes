@@ -10,7 +10,6 @@ import Combine
 
 protocol HomeScreenBusinessLogic {
     func fetchCharacterList(loading: Bool)
-    func loadMoreCharactersIfNeeded(with index: Int)
 }
 
 protocol HomeScreenDataStore {}
@@ -30,21 +29,20 @@ class HomeScreenInteractor: HomeScreenBusinessLogic, HomeScreenDataStore {
 
     func fetchCharacterList(loading: Bool) {
         if loading { presenter.presentLoading() }
-        
+
         api.getCharacters(offset: String(characterCounter))
             .sink(receiveCompletion: { [unowned self] response in
                 if case let .failure(error) = response {
                     presenter.presentError(error: error)
                 }
             }) { [unowned self] model in
-                characterCounter += model.data.count
+                if characterCounter + model.data.count >= model.data.total {
+                    characterCounter = model.data.total
+                } else {
+                    characterCounter += model.data.count
+                }
                 presenter.presentCompleted(responseModel: model)
             }
             .store(in: &disposables)
-    }
-
-    func loadMoreCharactersIfNeeded(with index: Int) {
-        guard index == characterCounter - 14 else { return }
-        fetchCharacterList(loading: false)
     }
 }

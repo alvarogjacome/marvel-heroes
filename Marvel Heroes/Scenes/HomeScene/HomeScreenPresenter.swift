@@ -17,7 +17,7 @@ protocol HomeScreenPresentationLogic {
 class HomeScreenPresenter: HomeScreenPresentationLogic {
     weak var viewController: HomeScreenDisplayLogic?
     private var characters: [Character] = []
-    
+
     func presentLoading() {
         viewController?.displayState(viewModel: .loading)
     }
@@ -27,7 +27,11 @@ class HomeScreenPresenter: HomeScreenPresentationLogic {
     }
 
     func presentCompleted(responseModel: CharactersResponseModel) {
-        characters.append(contentsOf: responseModel.data.results)
+        let newItems = responseModel.data.results.filter {
+            !characters.contains($0)
+        }
+
+        characters.append(contentsOf: newItems)
         viewController?.displayState(viewModel: .completed(characters))
     }
 }
