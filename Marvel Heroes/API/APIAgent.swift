@@ -23,7 +23,7 @@ class APIAgent {
         decoder.dateDecodingStrategy = .iso8601
     }
 
-    func run<T: ResponseModelProtocol>(_ endpoint: Endpoint) -> AnyPublisher<T, MarvelHeroesError> {
+    func run<T: ResponseModelProtocol>(_ endpoint: Endpoint) -> AnyPublisher<T, MHError> {
         let request = endpoint.urlRequest
         dump(request, name: "📤 Requested data")
         return URLSession.shared
@@ -31,10 +31,10 @@ class APIAgent {
             .tryMap(validate)
             .mapError { error in
                 dump(error, name: "⛔️ API error")
-                if let rac1Error = error as? MarvelHeroesError {
+                if let rac1Error = error as? MHError {
                     return rac1Error
                 }
-                return MarvelHeroesError.error(from: error)
+                return MHError.error(from: error)
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
@@ -42,10 +42,10 @@ class APIAgent {
 
     private func validate<T: ResponseModelProtocol>(_ data: Data, _ response: URLResponse) throws -> T {
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw MarvelHeroesError.invalidResponse
+            throw MHError.invalidResponse
         }
 
-        if let error = MarvelHeroesError.error(from: httpResponse.statusCode) {
+        if let error = MHError.error(from: httpResponse.statusCode) {
             throw error
         }
 
@@ -54,13 +54,13 @@ class APIAgent {
             dump(responseObject, name: "✅ Decoded data")
             return try validateResponse(responseObject)
         } catch {
-            throw MarvelHeroesError.decodingFailed(error)
+            throw MHError.decodingFailed(error)
         }
     }
 
     private func validateResponse<T: ResponseModelProtocol>(_ responseObject: T) throws -> T {
         guard responseObject.code == 200 else {
-            throw MarvelHeroesError.invalidResponse
+            throw MHError.invalidResponse
         }
         return responseObject
     }

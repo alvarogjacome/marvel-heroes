@@ -8,13 +8,13 @@
 import Foundation
 
 struct CharactersResponseModel: ResponseModelProtocol {
-    typealias Item = ResultData
-    let data: ResultData
+    typealias Item = CharacterResultData
+    let data: CharacterResultData
     let code: Int
     let status: String
 }
 
-struct ResultData: Codable {
+struct CharacterResultData: Decodable {
     let offset: Int
     let limit: Int
     let total: Int
@@ -22,43 +22,27 @@ struct ResultData: Codable {
     let results: [Character]
 }
 
-struct Character: Codable {
+struct Character: Decodable, Hashable {
     let id: Int
     let name: String
     let description: String
     let modified: String
     let thumbnail: Thumbnail
     let resourceURI: String
-    let comics: Comics
-    let series: Series
-    let stories: Stories
-    let events: Events
     let urls: [CharacterURLS]
 }
 
-struct Thumbnail: Codable {
+struct Thumbnail: Decodable, Hashable {
     let path: String
     let `extension`: String
+
+    var url: URL? {
+        guard !path.contains("image_not_available") else { return nil }
+        return URL(string: [path, self.extension].joined(separator: "."))
+    }
 }
 
-typealias Comics = ItemData
-typealias Series = ItemData
-typealias Stories = ItemData
-typealias Events = ItemData
-
-struct ItemData: Codable {
-    let available: Int
-    let collectionURI: String
-    let items: [Item]
-    let returned: Int
-}
-
-struct Item: Codable {
-    let resourceURI: String
-    let name: String
-}
-
-struct CharacterURLS: Codable {
+struct CharacterURLS: Decodable, Hashable {
     let type: String
     let url: String
 }

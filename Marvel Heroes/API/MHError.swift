@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MarvelHeroesError: Error, Equatable {
+enum MHError: Error, Equatable {
     case clientError(_ statusCode: Int)
     case serverError(_ statusCode: Int)
     case connectionError(Error?)
@@ -16,12 +16,12 @@ enum MarvelHeroesError: Error, Equatable {
     case invalidResponse
     case internalError
 
-    static func == (lhs: MarvelHeroesError, rhs: MarvelHeroesError) -> Bool {
+    static func == (lhs: MHError, rhs: MHError) -> Bool {
         lhs.localizedDescription == rhs.localizedDescription
     }
 }
 
-extension MarvelHeroesError: LocalizedError {
+extension MHError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .connectionError:
@@ -32,8 +32,8 @@ extension MarvelHeroesError: LocalizedError {
     }
 }
 
-extension MarvelHeroesError {
-    static func error(from error: Error) -> MarvelHeroesError {
+extension MHError {
+    static func error(from error: Error) -> MHError {
         let errorCode = (error as NSError).code
 
         switch errorCode {
@@ -44,7 +44,7 @@ extension MarvelHeroesError {
         }
     }
 
-    static func error(from statusCode: Int) -> MarvelHeroesError? {
+    static func error(from statusCode: Int) -> MHError? {
         switch statusCode {
         case 200 ..< 300: return nil
         case 400 ..< 500: return .clientError(statusCode)
