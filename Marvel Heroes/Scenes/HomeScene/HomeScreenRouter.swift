@@ -8,46 +8,34 @@
 
 import UIKit
 
-@objc protocol HomeScreenRoutingLogic {
-    // func routeToSomewhere(segue: UIStoryboardSegue?)
+protocol HomeScreenRoutingLogic {
+    func routeToDetailView(infoModel: Character)
 }
 
-protocol HomeScreenDataPassing {
-    var dataStore: HomeScreenDataStore? { get }
-}
-
-class HomeScreenRouter: NSObject, HomeScreenRoutingLogic, HomeScreenDataPassing {
+class HomeScreenRouter: HomeScreenRoutingLogic {
     weak var viewController: HomeScreenViewController?
     var dataStore: HomeScreenDataStore?
 
     // MARK: Routing
 
-    // func routeToSomewhere(segue: UIStoryboardSegue?)
-    // {
-    //  if let segue = segue {
-    //    let destinationVC = segue.destination as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //  } else {
-    //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-    //    var destinationDS = destinationVC.router!.dataStore!
-    //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-    //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-    //  }
-    // }
+    func routeToDetailView(infoModel: Character) {
+        let destinationVC = DetailViewController(model: infoModel)
+        viewController?.show(destinationVC, sender: nil)
+    }
+}
 
-    // MARK: Navigation
+class DetailViewController: MHBaseViewController {
+    init(model: Character) {
+        super.init(nibName: nil, bundle: nil)
+    }
 
-    // func navigateToSomewhere(source: HomeScreenViewController, destination: SomewhereViewController)
-    // {
-    //  source.show(destination, sender: nil)
-    // }
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-    // MARK: Passing data
-
-    // func passDataToSomewhere(source: HomeScreenDataStore, destination: inout SomewhereDataStore)
-    // {
-    //  destination.name = source.name
-    // }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        hideTitleView()
+    }
 }

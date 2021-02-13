@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		386D0F0825D80C80002772EB /* MHBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D0F0725D80C80002772EB /* MHBaseViewController.swift */; };
+		386D0F1025D80CD3002772EB /* MHViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D0F0F25D80CD3002772EB /* MHViewState.swift */; };
 		38AED50025D6EA8C0011C24A /* LayoutMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED4FF25D6EA8C0011C24A /* LayoutMaker.swift */; };
 		38AED51D25D6EC1D0011C24A /* HomeScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED51725D6EC1D0011C24A /* HomeScreenPresenter.swift */; };
 		38AED51F25D6EC1D0011C24A /* HomeScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED51925D6EC1D0011C24A /* HomeScreenRouter.swift */; };
-		38AED52025D6EC1D0011C24A /* HomeScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED51A25D6EC1D0011C24A /* HomeScreenModels.swift */; };
 		38AED52125D6EC1D0011C24A /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED51B25D6EC1D0011C24A /* HomeScreenViewController.swift */; };
 		38AED52225D6EC1D0011C24A /* HomeScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED51C25D6EC1D0011C24A /* HomeScreenInteractor.swift */; };
 		38AED52D25D6FA920011C24A /* MHCharacterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AED52C25D6FA920011C24A /* MHCharacterImageView.swift */; };
@@ -42,10 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		386D0F0725D80C80002772EB /* MHBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHBaseViewController.swift; sourceTree = "<group>"; };
+		386D0F0F25D80CD3002772EB /* MHViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHViewState.swift; sourceTree = "<group>"; };
 		38AED4FF25D6EA8C0011C24A /* LayoutMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMaker.swift; sourceTree = "<group>"; };
 		38AED51725D6EC1D0011C24A /* HomeScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenPresenter.swift; sourceTree = "<group>"; };
 		38AED51925D6EC1D0011C24A /* HomeScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenRouter.swift; sourceTree = "<group>"; };
-		38AED51A25D6EC1D0011C24A /* HomeScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenModels.swift; sourceTree = "<group>"; };
 		38AED51B25D6EC1D0011C24A /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		38AED51C25D6EC1D0011C24A /* HomeScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenInteractor.swift; sourceTree = "<group>"; };
 		38AED52C25D6FA920011C24A /* MHCharacterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHCharacterImageView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				38733E1325D66AD40013429E /* HomeScene */,
+				386D0F0725D80C80002772EB /* MHBaseViewController.swift */,
+				386D0F0F25D80CD3002772EB /* MHViewState.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -128,7 +132,6 @@
 			children = (
 				38AED51725D6EC1D0011C24A /* HomeScreenPresenter.swift */,
 				38AED51925D6EC1D0011C24A /* HomeScreenRouter.swift */,
-				38AED51A25D6EC1D0011C24A /* HomeScreenModels.swift */,
 				38AED51B25D6EC1D0011C24A /* HomeScreenViewController.swift */,
 				38AED51C25D6EC1D0011C24A /* HomeScreenInteractor.swift */,
 			);
@@ -340,6 +343,7 @@
 				38DEBE0F25D5B5C400F7B811 /* Configuration.swift in Sources */,
 				38AED52125D6EC1D0011C24A /* HomeScreenViewController.swift in Sources */,
 				38AED51D25D6EC1D0011C24A /* HomeScreenPresenter.swift in Sources */,
+				386D0F0825D80C80002772EB /* MHBaseViewController.swift in Sources */,
 				38DEBE1E25D5B6D600F7B811 /* MHError.swift in Sources */,
 				38DEBE2625D5B84F00F7B811 /* MarvelHeroesAPIClient.swift in Sources */,
 				38AED52225D6EC1D0011C24A /* HomeScreenInteractor.swift in Sources */,
@@ -348,13 +352,13 @@
 				38AED51F25D6EC1D0011C24A /* HomeScreenRouter.swift in Sources */,
 				38DEBDC925D5B0E700F7B811 /* AppDelegate.swift in Sources */,
 				38AED53525D6FB130011C24A /* CharacterCollectionViewCell.swift in Sources */,
+				386D0F1025D80CD3002772EB /* MHViewState.swift in Sources */,
 				38DEBE1525D5B67D00F7B811 /* CharactersEndpoint.swift in Sources */,
 				38AED53125D6FAB60011C24A /* MHHeaderLabel.swift in Sources */,
 				38DEBE2C25D5C90C00F7B811 /* CharactersResponseModel.swift in Sources */,
 				38DEBE0525D5B45300F7B811 /* APIAgent.swift in Sources */,
 				38DEBDCB25D5B0E700F7B811 /* SceneDelegate.swift in Sources */,
 				38DEBE0A25D5B57700F7B811 /* Endpoint.swift in Sources */,
-				38AED52025D6EC1D0011C24A /* HomeScreenModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

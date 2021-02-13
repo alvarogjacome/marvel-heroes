@@ -18,11 +18,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = UINavigationController(rootViewController: HomeScreenViewController(apiClient: apiClient))
         window?.makeKeyAndVisible()
-
-        configureNavBar()
-    }
-
-    func configureNavBar() {
-        UINavigationBar.appearance().tintColor = .systemRed
     }
 }

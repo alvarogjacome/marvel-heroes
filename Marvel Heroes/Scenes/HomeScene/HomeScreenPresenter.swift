@@ -9,15 +9,25 @@
 import UIKit
 
 protocol HomeScreenPresentationLogic {
-    func presentSomething(state: State<[Character]>)
+    func presentLoading()
+    func presentError(error: MHError)
+    func presentCompleted(responseModel: CharactersResponseModel)
 }
 
 class HomeScreenPresenter: HomeScreenPresentationLogic {
     weak var viewController: HomeScreenDisplayLogic?
+    private var characters: [Character] = []
+    
+    func presentLoading() {
+        viewController?.displayState(viewModel: .loading)
+    }
 
-    // MARK: Do something
+    func presentError(error: MHError) {
+        viewController?.displayState(viewModel: .error(error))
+    }
 
-    func presentSomething(state: State<[Character]>) {
-        viewController?.displayState(viewModel: state)
+    func presentCompleted(responseModel: CharactersResponseModel) {
+        characters.append(contentsOf: responseModel.data.results)
+        viewController?.displayState(viewModel: .completed(characters))
     }
 }

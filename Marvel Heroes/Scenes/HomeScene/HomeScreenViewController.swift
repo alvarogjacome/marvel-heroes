@@ -9,21 +9,32 @@
 import UIKit
 
 protocol HomeScreenDisplayLogic: AnyObject {
-    func displayState(viewModel: State<[Character]>)
+    func displayState(viewModel: MHViewState<[Character]>)
 }
 
-class HomeScreenViewController: BaseViewController, HomeScreenDisplayLogic {
+class HomeScreenViewController: MHBaseViewController {
     private var interactor: HomeScreenBusinessLogic!
-    private var router: (NSObjectProtocol & HomeScreenRoutingLogic & HomeScreenDataPassing)!
+    private var router: HomeScreenRoutingLogic!
 
     // MARK: Components
 
-    private lazy var collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: LayoutMaker.getLayout(in: view, withColumns: 2))
-    private lazy var dataSource = { UICollectionViewDiffableDataSource<Int, Character>(collectionView: collectionView) { (collectionView, indexPath, character) -> UICollectionViewCell? in
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollectionViewCell.reuseID, for: indexPath) as! CharacterCollectionViewCell
-        cell.set(character: character)
-        return cell
-    }
+    private lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: LayoutMaker.getLayout(in: view, withColumns: 2))
+        collection.showsVerticalScrollIndicator = false
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = .clear
+        collection.register(CharacterCollectionViewCell.self, forCellWithReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier)
+        collection.delegate = self
+
+        return collection
+    }()
+
+    private lazy var dataSource = {
+        UICollectionViewDiffableDataSource<LayoutMaker.Section, Character>(collectionView: collectionView) { (collectionView, indexPath, character) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCollectionViewCell.reuseIdentifier, for: indexPath) as! CharacterCollectionViewCell
+            cell.set(character: character)
+            return cell
+        }
     }()
 
     // MARK: Object lifecycle
@@ -57,46 +68,56 @@ class HomeScreenViewController: BaseViewController, HomeScreenDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureView()
-        configureCollectionView()
-        doSomething()
+        addSubviews()
+        layoutSubviews()
+        requestCharacterList()
     }
 
-    private func configureView() {
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
+    // MARK: Interactions
+
+    func requestCharacterList() {
+        interactor?.fetchCharacterList(loading: true)
     }
 
-    private func configureCollectionView() {
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(CharacterCollectionViewCell.self, forCellWithReuseIdentifier: CharacterCollectionViewCell.reuseID)
-        collectionView.delegate = self
+    // MARK: Layout
+
+    private func addSubviews() {
+        [collectionView].forEach(view.addSubview(_:))
     }
 
-    // MARK: Do something
-
-    func doSomething() {
-        interactor?.fetchCharacterList()
+    private func layoutSubviews() {
+        layoutCollectionView()
     }
 
-    func displayState(viewModel: State<[Character]>) {
+    private func layoutCollectionView() {
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+}
+
+extension HomeScreenViewController: HomeScreenDisplayLogic {
+    func displayState(viewModel: MHViewState<[Character]>) {
         switch viewModel {
         case let .completed(list):
-            super.displayCompleted()
-            update(with: list)
+            if !list.isEmpty {
+                super.displayCompleted()
+                update(with: list)
+                return
+            }
+            super.displayEmptyState { [unowned self] in
+                self.interactor.fetchCharacterList(loading: false)
+            }
         case let .error(error):
-            super.displayError(error: error)
+            super.displayError(error: error, tapAction: {})
+        case .loading:
+            super.displayLoading()
         default:
             break
         }
-    }
-
-    func update(with list: [Character], animate: Bool = true) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Character>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(list, toSection: 0)
-        dataSource.apply(snapshot, animatingDifferences: animate)
     }
 }
 
@@ -107,61 +128,13 @@ extension HomeScreenViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let character = dataSource.itemIdentifier(for: indexPath) else { return }
-        
-    }
-}
-
-protocol BaseDisplayLogic {
-    func displayLoading()
-    func displayError(error: Error)
-    func displayEmptyState()
-    func displayCompleted()
-}
-
-class BaseViewController: UIViewController, BaseDisplayLogic {
-    let loadingAlert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        router.routeToDetailView(infoModel: character)
     }
 
-    func displayLoading() {
-        loadingAlert.view.tintColor = UIColor.black
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = .medium
-        loadingIndicator.startAnimating()
-
-        loadingAlert.view.addSubview(loadingIndicator)
-        present(loadingAlert, animated: true, completion: nil)
-    }
-
-    func displayCompleted() {
-        dismissLoading()
-    }
-
-    func dismissLoading() {
-        loadingAlert.dismiss(animated: true)
-    }
-
-    func displayError(error: Error) {
-        dismissLoading()
-
-        let alert = UIAlertController(title: "⚠️ Ups! ⚠️", message: error.localizedDescription, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default) { _ in
-            fatalError(error.localizedDescription)
-        }
-        alert.addAction(action)
-
-        present(alert, animated: true)
-    }
-
-    func displayEmptyState() {
-        dismissLoading()
-
-        let alert = UIAlertController(title: "⚠️ Ups! ⚠️", message: "No data", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default)
-        alert.addAction(action)
-
-        present(alert, animated: true)
+    func update(with list: [Character], animate: Bool = true) {
+        var snapshot = NSDiffableDataSourceSnapshot<LayoutMaker.Section, Character>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(list, toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: animate)
     }
 }

@@ -26,6 +26,10 @@ extension MHError: LocalizedError {
         switch self {
         case .connectionError:
             return "Sin conexión"
+        case let .clientError(code):
+            return "Error por parte de cliente: \(code)"
+        case let .serverError(code):
+            return "Error por parte de servidor: \(code)"
         default:
             return "La operación no se ha podido completar"
         }

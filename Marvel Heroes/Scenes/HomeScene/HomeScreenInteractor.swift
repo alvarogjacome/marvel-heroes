@@ -9,7 +9,7 @@
 import Combine
 
 protocol HomeScreenBusinessLogic {
-    func fetchCharacterList()
+    func fetchCharacterList(loading: Bool)
     func loadMoreCharactersIfNeeded(with index: Int)
 }
 
@@ -18,9 +18,7 @@ protocol HomeScreenDataStore {}
 class HomeScreenInteractor: HomeScreenBusinessLogic, HomeScreenDataStore {
     let api: MarvelHeroesAPIClient
     let presenter: HomeScreenPresentationLogic
-    var characterCounter = 0
-    var characters: [Character] = []
-
+    private var characterCounter = 0
     private var disposables = Set<AnyCancellable>()
 
     init(api: MarvelHeroesAPIClient, presenter: HomeScreenPresentationLogic) {
@@ -30,23 +28,23 @@ class HomeScreenInteractor: HomeScreenBusinessLogic, HomeScreenDataStore {
 
     // MARK: Fetch characters
 
-    func fetchCharacterList() {
-        presenter.presentSomething(state: .loading)
+    func fetchCharacterList(loading: Bool) {
+        if loading { presenter.presentLoading() }
+        
         api.getCharacters(offset: String(characterCounter))
             .sink(receiveCompletion: { [unowned self] response in
                 if case let .failure(error) = response {
-                    presenter.presentSomething(state: .error(error))
+                    presenter.presentError(error: error)
                 }
             }) { [unowned self] model in
-                characterCounter += model.data.results.count
-                characters.append(contentsOf: model.data.results)
-                presenter.presentSomething(state: .completed(characters))
+                characterCounter += model.data.count
+                presenter.presentCompleted(responseModel: model)
             }
             .store(in: &disposables)
     }
 
     func loadMoreCharactersIfNeeded(with index: Int) {
-        guard index == characterCounter - 10 else { return }
-        fetchCharacterList()
+        guard index == characterCounter - 14 else { return }
+        fetchCharacterList(loading: false)
     }
 }

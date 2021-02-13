@@ -10,10 +10,10 @@ import SDWebImage
 import UIKit
 
 class CharacterCollectionViewCell: UICollectionViewCell {
-    static let reuseID = "CharacterCell"
+    static let reuseIdentifier = "CharacterCell"
 
-    private let avatarImageView = MHCharacterImageView(frame: .zero)
-    private let userNameLabel = MHHeaderLabel(textAlignment: .center)
+    private let characterImageView = MHCharacterImageView(frame: .zero)
+    private let characterNameLabel = MHHeaderLabel(textAlignment: .center)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,24 +26,24 @@ class CharacterCollectionViewCell: UICollectionViewCell {
     }
 
     func set(character: Character) {
-        userNameLabel.text = character.name
-        avatarImageView.sd_setImage(with: character.thumbnail.url, placeholderImage: UIImage(named: "placeholder"))
+        characterNameLabel.text = character.name
+        characterImageView.contentMode = .scaleAspectFill
+        characterImageView.sd_setImage(with: character.thumbnail.url, placeholderImage: UIImage(named: "verticalLogo"))
     }
 
     private func configure() {
-        addSubview(avatarImageView)
-        addSubview(userNameLabel)
-        
-        NSLayoutConstraint.activate([
-            avatarImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            avatarImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            avatarImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
+        addSubview(characterImageView)
 
-            userNameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 10),
-            userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            userNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            userNameLabel.heightAnchor.constraint(equalToConstant: 20)
+        NSLayoutConstraint.activate([
+            characterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            characterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            characterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            characterImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])
+
+        layer.masksToBounds = true
+        layer.cornerRadius = 10
+        layer.borderWidth = 0.2
+        layer.borderColor = UIColor.systemGray.cgColor
     }
 }

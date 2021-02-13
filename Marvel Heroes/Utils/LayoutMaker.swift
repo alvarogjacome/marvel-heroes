@@ -14,13 +14,14 @@ enum LayoutMaker {
 
     static func getLayout(in view: UIView, withColumns columns: Int) -> UICollectionViewFlowLayout {
         let viewWidth = view.bounds.width
-        let padding: CGFloat = 6
-        let availableSpace = viewWidth - (padding * 6)
+        let padding: CGFloat = 5
+        let sidePadding = padding * CGFloat(columns)
+        let availableSpace = viewWidth - (sidePadding * CGFloat(columns + 1))
         let itemWidth = availableSpace / CGFloat(columns)
 
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.2)
+        flowLayout.sectionInset = UIEdgeInsets(top: 20, left: sidePadding, bottom: sidePadding, right: sidePadding)
+        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.8)
 
         return flowLayout
     }
