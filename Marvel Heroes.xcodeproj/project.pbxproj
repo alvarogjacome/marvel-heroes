@@ -42,6 +42,7 @@
 		38DEBE1E25D5B6D600F7B811 /* MHError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBE1D25D5B6D600F7B811 /* MHError.swift */; };
 		38DEBE2625D5B84F00F7B811 /* MarvelHeroesAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBE2525D5B84F00F7B811 /* MarvelHeroesAPIClient.swift */; };
 		38DEBE2C25D5C90C00F7B811 /* CharactersResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBE2B25D5C90C00F7B811 /* CharactersResponseModel.swift */; };
+		38E4787725D9A91A00AC3997 /* screenshots.png in Resources */ = {isa = PBXBuildFile; fileRef = 38E4787525D9A91A00AC3997 /* screenshots.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		38DEBE2525D5B84F00F7B811 /* MarvelHeroesAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelHeroesAPIClient.swift; sourceTree = "<group>"; };
 		38DEBE2B25D5C90C00F7B811 /* CharactersResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResponseModel.swift; sourceTree = "<group>"; };
 		38E4787225D9A33000AC3997 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		38E4787525D9A91A00AC3997 /* screenshots.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshots.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +310,7 @@
 		38E4787425D9A7F900AC3997 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
+				38E4787525D9A91A00AC3997 /* screenshots.png */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				381A6C3425D98844003FE15B /* LaunchScreen.storyboard in Resources */,
 				381A6C3C25D98950003FE15B /* Localizable.strings in Resources */,
 				381A6C2725D98774003FE15B /* Localizable.strings in Resources */,
+				38E4787725D9A91A00AC3997 /* screenshots.png in Resources */,
 				38DEBDD225D5B0E800F7B811 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
