@@ -23,3 +23,4 @@ class MarvelHeroesAPIClient: APIAgent, MarvelHeroesAPIClientProtocol {
         return run(endpoint)
     }
 }
+

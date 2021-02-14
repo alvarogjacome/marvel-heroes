@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct CharactersResponseModel: ResponseModelProtocol {
+struct CharactersResponseModel: ResponseModelProtocol, Equatable {
     typealias Item = CharacterResultData
     let data: CharacterResultData
     let code: Int
     let status: String
 }
 
-struct CharacterResultData: Decodable {
+struct CharacterResultData: Decodable, Equatable {
     let offset: Int
     let limit: Int
     let total: Int

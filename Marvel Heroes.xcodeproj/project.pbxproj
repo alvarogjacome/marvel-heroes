@@ -34,7 +34,7 @@
 		38DEBDC925D5B0E700F7B811 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBDC825D5B0E700F7B811 /* AppDelegate.swift */; };
 		38DEBDCB25D5B0E700F7B811 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBDCA25D5B0E700F7B811 /* SceneDelegate.swift */; };
 		38DEBDD225D5B0E800F7B811 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38DEBDD125D5B0E800F7B811 /* Assets.xcassets */; };
-		38DEBDE025D5B0E800F7B811 /* Marvel_HeroesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBDDF25D5B0E800F7B811 /* Marvel_HeroesTests.swift */; };
+		38DEBDE025D5B0E800F7B811 /* MarvelHeroesAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBDDF25D5B0E800F7B811 /* MarvelHeroesAPIClientTests.swift */; };
 		38DEBE0525D5B45300F7B811 /* APIAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBE0425D5B45300F7B811 /* APIAgent.swift */; };
 		38DEBE0A25D5B57700F7B811 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBE0925D5B57700F7B811 /* Endpoint.swift */; };
 		38DEBE0F25D5B5C400F7B811 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DEBE0E25D5B5C400F7B811 /* Configuration.swift */; };
@@ -84,7 +84,7 @@
 		38DEBDD125D5B0E800F7B811 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38DEBDD625D5B0E800F7B811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38DEBDDB25D5B0E800F7B811 /* Marvel HeroesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Marvel HeroesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		38DEBDDF25D5B0E800F7B811 /* Marvel_HeroesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marvel_HeroesTests.swift; sourceTree = "<group>"; };
+		38DEBDDF25D5B0E800F7B811 /* MarvelHeroesAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelHeroesAPIClientTests.swift; sourceTree = "<group>"; };
 		38DEBDE125D5B0E800F7B811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38DEBE0425D5B45300F7B811 /* APIAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAgent.swift; sourceTree = "<group>"; };
 		38DEBE0925D5B57700F7B811 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -93,6 +93,7 @@
 		38DEBE1D25D5B6D600F7B811 /* MHError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHError.swift; sourceTree = "<group>"; };
 		38DEBE2525D5B84F00F7B811 /* MarvelHeroesAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelHeroesAPIClient.swift; sourceTree = "<group>"; };
 		38DEBE2B25D5C90C00F7B811 /* CharactersResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResponseModel.swift; sourceTree = "<group>"; };
+		38E4787225D9A33000AC3997 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +235,8 @@
 		38DEBDBC25D5B0E700F7B811 = {
 			isa = PBXGroup;
 			children = (
+				38E4787425D9A7F900AC3997 /* Screenshots */,
+				38E4787225D9A33000AC3997 /* README.md */,
 				38DEBDC725D5B0E700F7B811 /* Marvel Heroes */,
 				38DEBDDE25D5B0E800F7B811 /* Marvel HeroesTests */,
 				38DEBDC625D5B0E700F7B811 /* Products */,
@@ -252,10 +255,10 @@
 		38DEBDC725D5B0E700F7B811 /* Marvel Heroes */ = {
 			isa = PBXGroup;
 			children = (
-				381A6BF225D97F4F003FE15B /* Extensions */,
 				38DEBE0325D5B44A00F7B811 /* API */,
 				38733E1025D66A9B0013429E /* App */,
 				38733E1125D66AAF0013429E /* Constants */,
+				381A6BF225D97F4F003FE15B /* Extensions */,
 				38733E0F25D66A8A0013429E /* Resources */,
 				38DEBE2A25D5C8FD00F7B811 /* ResponseModel */,
 				38733E1225D66ACE0013429E /* Scenes */,
@@ -268,7 +271,7 @@
 		38DEBDDE25D5B0E800F7B811 /* Marvel HeroesTests */ = {
 			isa = PBXGroup;
 			children = (
-				38DEBDDF25D5B0E800F7B811 /* Marvel_HeroesTests.swift */,
+				38DEBDDF25D5B0E800F7B811 /* MarvelHeroesAPIClientTests.swift */,
 				38DEBDE125D5B0E800F7B811 /* Info.plist */,
 			);
 			path = "Marvel HeroesTests";
@@ -300,6 +303,13 @@
 				38DEBE2B25D5C90C00F7B811 /* CharactersResponseModel.swift */,
 			);
 			path = ResponseModel;
+			sourceTree = "<group>";
+		};
+		38E4787425D9A7F900AC3997 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,7 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38DEBDE025D5B0E800F7B811 /* Marvel_HeroesTests.swift in Sources */,
+				38DEBDE025D5B0E800F7B811 /* MarvelHeroesAPIClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,8 +621,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M9R5VTJGJ5;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Marvel Heroes/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -621,6 +631,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alvarogjacome.Marvel-Heroes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -631,8 +642,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M9R5VTJGJ5;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Marvel Heroes/App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -641,6 +652,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alvarogjacome.Marvel-Heroes";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
