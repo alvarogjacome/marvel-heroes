@@ -12,8 +12,17 @@ import UIKit
 class CharacterCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "CharacterCell"
 
-    private let characterImageView = MHCharacterImageView(frame: .zero)
-    private let characterNameLabel = MHHeaderLabel(textAlignment: .center)
+    private lazy var characterImageView = MHCharacterImageView(frame: .zero)
+    private lazy var characterNameLabel = MHHeaderLabel(textAlignment: .center)
+    private lazy var blurredView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.layer.cornerRadius = 10
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,12 +36,11 @@ class CharacterCollectionViewCell: UICollectionViewCell {
 
     func set(character: Character) {
         characterNameLabel.text = character.name
-        characterImageView.contentMode = .scaleAspectFill
         characterImageView.sd_setImage(with: character.thumbnail.url, placeholderImage: UIImage(named: "verticalLogo"))
     }
 
     private func configure() {
-        addSubview(characterImageView)
+        [characterImageView, blurredView, characterNameLabel].forEach(addSubview(_:))
 
         NSLayoutConstraint.activate([
             characterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -41,9 +49,21 @@ class CharacterCollectionViewCell: UICollectionViewCell {
             characterImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])
 
+        NSLayoutConstraint.activate([
+            blurredView.topAnchor.constraint(equalTo: characterNameLabel.topAnchor, constant: -10),
+            blurredView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            blurredView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            blurredView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+
+        NSLayoutConstraint.activate([
+            characterNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            characterNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            characterNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+
+        ])
+
         layer.masksToBounds = true
         layer.cornerRadius = 10
-        layer.borderWidth = 0.2
-        layer.borderColor = UIColor.systemGray.cgColor
     }
 }

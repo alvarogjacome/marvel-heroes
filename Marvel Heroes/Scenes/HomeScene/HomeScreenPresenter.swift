@@ -11,7 +11,7 @@ import UIKit
 protocol HomeScreenPresentationLogic {
     func presentLoading()
     func presentError(error: MHError)
-    func presentCompleted(responseModel: CharactersResponseModel)
+    func presentCompleted(responseModel: CharactersResponseModel) -> Int
 }
 
 class HomeScreenPresenter: HomeScreenPresentationLogic {
@@ -26,12 +26,13 @@ class HomeScreenPresenter: HomeScreenPresentationLogic {
         viewController?.displayState(viewModel: .error(error))
     }
 
-    func presentCompleted(responseModel: CharactersResponseModel) {
+    func presentCompleted(responseModel: CharactersResponseModel) -> Int {
         let newItems = responseModel.data.results.filter {
             !characters.contains($0)
         }
 
         characters.append(contentsOf: newItems)
         viewController?.displayState(viewModel: .completed(characters))
+        return characters.count
     }
 }

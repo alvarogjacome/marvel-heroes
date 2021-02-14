@@ -44,7 +44,7 @@ class MHBaseViewController: UIViewController, MHBaseDisplayLogic {
         loadingAlert.view.tintColor = UIColor.black
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
         loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = .medium
+        loadingIndicator.style = .large
         loadingIndicator.startAnimating()
 
         loadingAlert.view.addSubview(loadingIndicator)

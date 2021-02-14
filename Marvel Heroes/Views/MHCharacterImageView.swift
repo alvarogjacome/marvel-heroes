@@ -22,6 +22,7 @@ class MHCharacterImageView: UIImageView {
     private func configure() {
         clipsToBounds = true
         image = UIImage()
+        contentMode = .scaleAspectFill
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

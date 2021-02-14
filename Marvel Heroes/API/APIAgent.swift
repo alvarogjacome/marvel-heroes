@@ -36,7 +36,7 @@ class APIAgent {
                 }
                 return MHError.error(from: error)
             }
-            .receive(on: DispatchQueue.main)
+            .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
 

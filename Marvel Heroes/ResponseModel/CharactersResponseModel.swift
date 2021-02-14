@@ -28,6 +28,9 @@ struct Character: Decodable, Hashable {
     let description: String
     let thumbnail: Thumbnail
     let urls: [CharacterURLS]
+    let comics: ItemData
+    let series: ItemData
+    let stories: ItemData
 }
 
 struct Thumbnail: Decodable, Hashable {
@@ -35,9 +38,21 @@ struct Thumbnail: Decodable, Hashable {
     let `extension`: String
 
     var url: URL? {
-        guard !path.contains("image_not_available") else { return nil }
+        guard !path.contains("image_not_available"), !path.contains("4c002e0305708") else { return nil }
         return URL(string: [path, self.extension].joined(separator: "."))
     }
+}
+
+struct ItemData: Decodable, Hashable {
+    let available: Int
+    let collectionURI: String
+    let items: [Item]
+    let returned: Int
+}
+
+struct Item: Decodable, Hashable {
+    let resourceURI: String
+    let name: String
 }
 
 struct CharacterURLS: Decodable, Hashable {

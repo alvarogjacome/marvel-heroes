@@ -8,13 +8,13 @@
 import Combine
 
 protocol MarvelHeroesAPIClientProtocol {
-    func getCharacters(offset: String) -> AnyPublisher<CharactersResponseModel, MHError>
+    func getCharacters(offset: String, limit: String) -> AnyPublisher<CharactersResponseModel, MHError>
     func getCharacter(id: String) -> AnyPublisher<CharactersResponseModel, MHError>
 }
 
 class MarvelHeroesAPIClient: APIAgent, MarvelHeroesAPIClientProtocol {
-    func getCharacters(offset: String) -> AnyPublisher<CharactersResponseModel, MHError> {
-        let endpoint: CharactersEndpoint = .getAll(offset: offset)
+    func getCharacters(offset: String, limit: String) -> AnyPublisher<CharactersResponseModel, MHError> {
+        let endpoint: CharactersEndpoint = .getAll(offset: offset, limit: limit)
         return run(endpoint)
     }
 

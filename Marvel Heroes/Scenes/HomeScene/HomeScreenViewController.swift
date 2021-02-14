@@ -19,7 +19,7 @@ class HomeScreenViewController: MHBaseViewController {
     // MARK: Components
 
     private lazy var collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: LayoutMaker.getLayout(in: view, withColumns: 2))
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: LayoutMaker.getLayout(in: view, withColumns: 3))
         collection.showsVerticalScrollIndicator = false
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = .clear

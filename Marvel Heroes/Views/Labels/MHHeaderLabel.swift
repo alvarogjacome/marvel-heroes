@@ -22,14 +22,14 @@ class MHHeaderLabel: UILabel {
     convenience init(textAlignment: NSTextAlignment) {
         self.init(frame: .zero)
         self.textAlignment = textAlignment
-        self.font = .preferredFont(forTextStyle: .headline)
+        self.font = .preferredFont(forTextStyle: .title3)
     }
 
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         textColor = .label
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.8
+        numberOfLines = 3
         lineBreakMode = .byTruncatingTail
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 enum CharactersEndpoint: Endpoint {
-    case getAll(offset: String)
+    case getAll(offset: String, limit: String)
     case getByID(id: String)
 
     var path: String {
@@ -23,8 +23,8 @@ enum CharactersEndpoint: Endpoint {
 
     var params: [String: String]? {
         switch self {
-        case let .getAll(offset):
-            return ["offset": offset]
+        case let .getAll(offset, limit):
+            return ["offset": offset, "limit": limit]
         case .getByID:
             return nil
         }
