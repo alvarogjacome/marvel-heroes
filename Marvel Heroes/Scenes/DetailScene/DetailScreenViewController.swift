@@ -22,7 +22,7 @@ class DetailScreenViewController: MHBaseViewController, DetailScreenDisplayLogic
 
     private lazy var presentationImageView: MHCharacterImageView = {
         let imageView = MHCharacterImageView(frame: .zero)
-        imageView.sd_setImage(with: character.thumbnail.url, placeholderImage: UIImage(named: "verticalLogo"))
+        imageView.sd_setImage(with: character.thumbnail.url, placeholderImage: UIImage(.verticalLogo))
         imageView.layer.cornerRadius = 50
         imageView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         imageView.layer.masksToBounds = true
@@ -97,7 +97,7 @@ class DetailScreenViewController: MHBaseViewController, DetailScreenDisplayLogic
         button.addTarget(self, action: #selector(launchDetails), for: .touchUpInside)
         button.layer.cornerRadius = 15
         button.setTitleColor(.label, for: .normal)
-        button.setTitle("🔗 More info", for: .normal)
+        button.setTitle(NSLocalizedString(.moreInfo), for: .normal)
         return button
     }()
 
@@ -190,17 +190,17 @@ class DetailScreenViewController: MHBaseViewController, DetailScreenDisplayLogic
 
         switch type {
         case let .comics(count):
-            let firstString = NSMutableAttributedString(string: "📰 Comics: ", attributes: firstAttributes)
+            let firstString = NSMutableAttributedString(string: NSLocalizedString(.comics), attributes: firstAttributes)
             let secondString = NSAttributedString(string: String(count), attributes: secondAttributes)
             firstString.append(secondString)
             label.attributedText = firstString
         case let .series(count):
-            let firstString = NSMutableAttributedString(string: "📺 Series: ", attributes: firstAttributes)
+            let firstString = NSMutableAttributedString(string: NSLocalizedString(.series), attributes: firstAttributes)
             let secondString = NSAttributedString(string: String(count), attributes: secondAttributes)
             firstString.append(secondString)
             label.attributedText = firstString
         case let .stories(count):
-            let firstString = NSMutableAttributedString(string: "🎭 Stories: ", attributes: firstAttributes)
+            let firstString = NSMutableAttributedString(string: NSLocalizedString(.stories), attributes: firstAttributes)
             let secondString = NSAttributedString(string: String(count), attributes: secondAttributes)
             firstString.append(secondString)
             label.attributedText = firstString

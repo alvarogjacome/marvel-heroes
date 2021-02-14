@@ -1,0 +1,16 @@
+//
+//  Created by Álvaro Gutiérrez Jácome on 14/2/21.
+//
+
+"loading" = "Cargando...";
+"error" = "⛔️ ¡Error!";
+"ok" = "Ok";
+"empty" = "Esto está vacío...";
+"comics" = "📰 Comics: ";
+"stories" = "🎭 Historias: ";
+"series" = "📺 Series: ";
+"moreInfo" = "🔗 Más información";
+"noConnection" = "No hay conexión a internet";
+"serverError" = "Error de servidor";
+"clientError" = "Error de cliente";
+"unavailable" = "La operación no ha podido ser completada";

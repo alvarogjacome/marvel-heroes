@@ -16,7 +16,7 @@ protocol MHBaseDisplayLogic {
 }
 
 class MHBaseViewController: UIViewController, MHBaseDisplayLogic {
-    let loadingAlert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
+    let loadingAlert = UIAlertController(title: nil, message: NSLocalizedString(.loading), preferredStyle: .alert)
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -24,10 +24,10 @@ class MHBaseViewController: UIViewController, MHBaseDisplayLogic {
     }
 
     private func setupNavbar() {
-        let imageView = UIImageView(image: UIImage(named: "navbarLogo"))
+        let imageView = UIImageView(image: UIImage(.navbarLogo))
         imageView.contentMode = .scaleAspectFit
         imageView.layer.shadowRadius = 8
-        imageView.layer.shadowColor = UIColor(named: "AccentColor")?.cgColor
+        imageView.layer.shadowColor = UIColor(.accentColor).cgColor
         imageView.layer.shadowOffset = .init(width: 0, height: 0)
         imageView.layer.shadowOpacity = 1
         navigationItem.titleView = imageView
@@ -36,6 +36,7 @@ class MHBaseViewController: UIViewController, MHBaseDisplayLogic {
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.isTranslucent = true
     }
+
     func hideTitleView() {
         navigationItem.titleView = nil
     }
@@ -62,8 +63,8 @@ class MHBaseViewController: UIViewController, MHBaseDisplayLogic {
     func displayError(error: Error, tapAction: @escaping () -> Void) {
         dismissLoading()
 
-        let alert = UIAlertController(title: "⛔️ Error!", message: error.localizedDescription, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .destructive) { _ in
+        let alert = UIAlertController(title: NSLocalizedString(.error), message: error.localizedDescription, preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString(.ok), style: .destructive) { _ in
             assertionFailure(error.localizedDescription)
             tapAction()
         }
@@ -75,8 +76,8 @@ class MHBaseViewController: UIViewController, MHBaseDisplayLogic {
     func displayEmptyState(tapAction: @escaping () -> Void) {
         dismissLoading()
 
-        let alert = UIAlertController(title: "🌵 🌵 🌵", message: "This seems empty...", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+        let alert = UIAlertController(title: "🌵 🌵 🌵", message: NSLocalizedString(.empty), preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString(.ok), style: .default, handler: { _ in
             tapAction()
         })
         alert.addAction(action)

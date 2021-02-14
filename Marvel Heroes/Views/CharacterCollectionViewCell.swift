@@ -36,7 +36,7 @@ class CharacterCollectionViewCell: UICollectionViewCell {
 
     func set(character: Character) {
         characterNameLabel.text = character.name
-        characterImageView.sd_setImage(with: character.thumbnail.url, placeholderImage: UIImage(named: "verticalLogo"))
+        characterImageView.sd_setImage(with: character.thumbnail.url, placeholderImage: UIImage(.verticalLogo))
     }
 
     private func configure() {

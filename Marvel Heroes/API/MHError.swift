@@ -25,13 +25,13 @@ extension MHError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .connectionError:
-            return "Sin conexión"
+            return NSLocalizedString(.noConnection)
         case let .clientError(code):
-            return "Error por parte de cliente: \(code)"
+            return "\(NSLocalizedString(.clientError)): \(code)"
         case let .serverError(code):
-            return "Error por parte de servidor: \(code)"
+            return "\(NSLocalizedString(.serverError)): \(code)"
         default:
-            return "La operación no se ha podido completar"
+            return NSLocalizedString(.clientError)
         }
     }
 }
