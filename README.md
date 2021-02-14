@@ -18,7 +18,7 @@ Developed using native frameworks:
 - UIKit
 - Combine
 
-Developed using native frameworks:
+And third party:
 - [SDWebImage](https://github.com/SDWebImage/SDWebImage)
 
 
